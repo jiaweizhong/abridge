@@ -2,7 +2,7 @@ variable "service_accounts" {
   type = map(object({
     display_name = string
   }))
-  description = "Service account "
+  description = "Service account"
 }
 
 variable "project" {

@@ -7,19 +7,63 @@ This Terraform project provisions a minimum viable GCP environment that includes
 The configuration follows GCP best practices for security and networking, and the modules are designed to be reusable.
 
 ## Prerequisites
-- Terraform installed on your machine.
-- A configured GCP account with the following APIs enabled:
-  - Compute Engine API
-  - Kubernetes Engine API
-  - IAM API
-- Authentication set up via:
+- Install Terraform on local machine
+- Create GCP account or use with existing account
+  - Enable following APIs:
+    - Compute Engine API
+    - Kubernetes Engine API
+    - IAM API
+- Verify GCP SDK and authenticate to login set:
   ```bash
+  gcloud version
   gcloud auth application-default login
+## Create a terraform.tfvars
+- Use a terraform.tfvars to apply your custom configuration to the Terraform setup template, e.g. following is my setup for testing
+  ```terraform
+  project        = "terraform-test-456019"
+  region         = "us-west1"
+  network_name   = "my-test-vpc"
+
+  subnets = {
+    "subnet-a" = { cidr = "10.0.1.0/24" },
+    "subnet-b" = { cidr = "10.0.2.0/24" }
+  }
+
+  service_accounts = {
+    "application-sa" = { display_name = "Application Service Account" },
+    "database-sa"  = { display_name = "Database Service Account" }
+  }
+
+  cluster_name = "my-test-gke"
+
+  node_pools = [
+    {
+      name         = "default-pool"
+      machine_type = "e2-medium"
+      min_count    = 1
+      max_count    = 3
+    }
+  ]
 
 ## Testing & Validation
+- Run terraform init
+  ```bash
+  terraform init
+- Run terraform validate & plan
+  ```bash
+  terraform validate
+  terraform plan
+- Execute to apply the change
+  ```bash
+  terraform apply
+- Clean up after the testing
+  ```bash
+  terraform destroy
 
-terraform init
-terraform validate
-terraform plan
-terraform apply
-terraform destroy
+## Testing Results
+- GKE Cluster
+![Alt Text](images/GKE.png)
+- Compute 
+![Alt Text](images/Compute.png)
+- Network
+![Alt Text](images/VPC.png)
