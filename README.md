@@ -13,7 +13,7 @@ The configuration follows GCP best practices for security and networking, and th
     - Compute Engine API
     - Kubernetes Engine API
     - IAM API
-- Verify GCP SDK and authenticate to login set:
+- Verify GCP SDK and authenticate to login:
   ```bash
   gcloud version
   gcloud auth application-default login
