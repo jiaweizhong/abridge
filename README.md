@@ -44,6 +44,11 @@ The configuration follows GCP best practices for security and networking, and th
       max_count    = 3
     }
   ]
+- Terraform Best Practices
+  - Custom VPC & explicit subnet definition
+  - Split module design for reusability
+  - Custom service account to avoid using default service account
+  - Remove default GKE nodepool forcing define custom node pool
 
 ## Testing & Validation
 - Run terraform init
@@ -67,3 +72,5 @@ The configuration follows GCP best practices for security and networking, and th
 ![Alt Text](images/Compute.png)
 - Network
 ![Alt Text](images/VPC.png)
+- Service Account
+![Alt Text](images/SA.png)
